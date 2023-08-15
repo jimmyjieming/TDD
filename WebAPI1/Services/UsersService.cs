@@ -14,15 +14,6 @@ public class UsersService : IUsersService
         _apiConfig = apiConfig.Value;
     }
 
-    public UsersService(HttpClient httpClient, UsersApiOptions apiConfig)
-    {
-        HttpClient = httpClient;
-        ApiConfig = apiConfig;
-    }
-
-    public HttpClient HttpClient { get; }
-    public UsersApiOptions ApiConfig { get; }
-
     public async Task<List<User>> GetAllUsers()
     {
         var usersResponse = await _httpClient
