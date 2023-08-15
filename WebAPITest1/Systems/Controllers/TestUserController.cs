@@ -9,16 +9,19 @@ namespace WebAPITest1.UnitTests.Systems.Controllers
 {
     public class TestUserController
     {
+
         [Fact]
         public async Task Get_OnSuccess_ReturnStatusCode200()
         {
             //Arrange
             var mockUsersService = new Mock<IUsersService>();
+            var mockEligibleCheckDemo1 = new Mock<IEligibleCheckDemo1>();
+
             mockUsersService
                 .Setup(service => service.GetAllUsers())
                 .ReturnsAsync(UsersFixture.getTestusers());
 
-            var sut = new UsersController(mockUsersService.Object);
+            var sut = new UsersController(mockUsersService.Object, mockEligibleCheckDemo1.Object);
             //Act
             var result = (OkObjectResult)await sut.Get();
             //Assert
@@ -30,11 +33,12 @@ namespace WebAPITest1.UnitTests.Systems.Controllers
         {
             //Arrange
             var mockUsersService = new Mock<IUsersService>();
+            var mockEligibleCheckDemo1 = new Mock<IEligibleCheckDemo1>();
             mockUsersService
                 .Setup(service => service.GetAllUsers())
                 .ReturnsAsync(new List<User>());
 
-            var sut = new UsersController(mockUsersService.Object);
+            var sut = new UsersController(mockUsersService.Object, mockEligibleCheckDemo1.Object);
 
             //Act
             var result = await sut.Get();
@@ -50,11 +54,12 @@ namespace WebAPITest1.UnitTests.Systems.Controllers
         {
             //Arrange
             var mockUsersService = new Mock<IUsersService>();
+            var mockEligibleCheckDemo1 = new Mock<IEligibleCheckDemo1>();
             mockUsersService
                 .Setup(service => service.GetAllUsers())
                 .ReturnsAsync(UsersFixture.getTestusers());
 
-            var sut = new UsersController(mockUsersService.Object);
+            var sut = new UsersController(mockUsersService.Object, mockEligibleCheckDemo1.Object);
 
             //Act
             var result = await sut.Get();
@@ -69,11 +74,12 @@ namespace WebAPITest1.UnitTests.Systems.Controllers
         {
             //Arrange
             var mockUsersService = new Mock<IUsersService>();
+            var mockEligibleCheckDemo1 = new Mock<IEligibleCheckDemo1>();
             mockUsersService
                 .Setup(service => service.GetAllUsers())
                 .ReturnsAsync(new List<User>());
 
-            var sut = new UsersController(mockUsersService.Object);
+            var sut = new UsersController(mockUsersService.Object, mockEligibleCheckDemo1.Object);
 
             //Act
             var result = await sut.Get();
