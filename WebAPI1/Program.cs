@@ -1,5 +1,6 @@
 using WebAPI1.Config;
 using WebAPI1.Models;
+using WebAPI1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,5 +33,6 @@ void ConfigureServices(IServiceCollection services)
 {
     services.Configure<UsersApiOptions>(builder.Configuration.GetSection("UsersApiOptions"));
     services.AddTransient<IUsersService, UsersService>();
+    services.AddTransient<IEligibleCheckDemo1, EligibleCheckServiceDemo1>();
     services.AddHttpClient<IUsersService, UsersService>();
 }
