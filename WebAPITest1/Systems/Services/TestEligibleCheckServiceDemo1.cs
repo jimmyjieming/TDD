@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebAPI1.Config;
+using WebAPI1.Models;
 using WebAPI1.Services;
+using WebAPITest1.UnitTests.Fakes;
 
 namespace WebAPITest1.UnitTests.Systems.Services
 {
@@ -33,6 +35,19 @@ namespace WebAPITest1.UnitTests.Systems.Services
             //Assert
             result.Should().BeTrue();
 
+        }
+
+
+        [Fact]
+        public async Task CheckUsersLength_ReturnsFalse_WhenLessUsersThanValue_Fabio()
+        {
+            var fakeUserService = new FakeUsersService();
+
+            var sut = new EligibleCheckServiceDemo1(fakeUserService);
+
+            var result = await sut.CheckUsersLength(4);
+
+            result.Should().BeTrue();
         }
     }
 }
