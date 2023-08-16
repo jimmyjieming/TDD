@@ -13,8 +13,10 @@ namespace WebAPITest1.UnitTests.Systems.Services
 {
     public class TestEligibleCheckServiceDemo1
     {
-        [Fact]
-        public async Task CheckUsersLength_ReturnsFalse_WhenLessUsersThanValue()
+        [Theory]
+        [InlineData(4)]
+        [InlineData(3)]
+        public async Task CheckUsersLength_ReturnsFalse_WhenLessUsersThanValue(int value)
         {
             //Arrange
             var httpClientMock = new Mock<HttpClient>();
@@ -28,7 +30,7 @@ namespace WebAPITest1.UnitTests.Systems.Services
             var sut = new EligibleCheckServiceDemo1(userServiceMock.Object);
 
             //Act
-            var result = await sut.CheckUsersLength(4);
+            var result = await sut.CheckUsersLength(value);
 
             //Assert
             result.Should().BeTrue();
