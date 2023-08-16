@@ -19,6 +19,10 @@ namespace WebAPITest1.UnitTests.Systems.Services
             //Arrange
             var httpClientMock = new Mock<HttpClient>();
             var apiConfigMock = new Mock<IOptions<UsersApiOptions>>();
+            apiConfigMock.Setup(x => x.Value).Returns(new UsersApiOptions
+            {
+                Endpoint = "https://jsonplaceholder.typicode.com/users"
+            });
 
             var userServiceMock = new Mock<UsersService>(httpClientMock.Object, apiConfigMock.Object);
             var sut = new EligibleCheckServiceDemo1(userServiceMock.Object);
