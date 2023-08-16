@@ -2,7 +2,7 @@
 
 namespace WebAPI1.Services
 {
-    public class EligibleCheckServiceDemo1: IEligibleCheckDemo1
+    public class EligibleCheckServiceDemo1 : IEligibleCheckDemo1
     {
         private readonly IUsersService _usersService;
         public EligibleCheckServiceDemo1(IUsersService usersService)
