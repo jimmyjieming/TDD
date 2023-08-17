@@ -22,8 +22,8 @@ namespace WebAPITest1.UnitTests.Systems.Services
         {
             //Arrange
             var httpClientMock = new Mock<HttpClient>();
-            var apiConfigMock = new Mock<IOptions<UsersApiOptions>>();
-            apiConfigMock.Setup(x => x.Value).Returns(new UsersApiOptions
+            var apiConfigMock = new Mock<IOptionsMonitor<UsersApiOptions>>();
+            apiConfigMock.Setup(x => x.CurrentValue).Returns(new UsersApiOptions
             {
                 Endpoint = "https://jsonplaceholder.typicode.com/users"
             });

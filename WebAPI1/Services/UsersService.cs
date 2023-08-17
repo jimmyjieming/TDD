@@ -8,10 +8,10 @@ public class UsersService : IUsersService
     private readonly HttpClient _httpClient;
     private readonly UsersApiOptions _apiConfig;
     public UsersService(HttpClient httpClient,
-        IOptions<UsersApiOptions> apiConfig)
+        IOptionsMonitor<UsersApiOptions> apiConfig)
     {
         _httpClient = httpClient;
-        _apiConfig = apiConfig.Value;
+        _apiConfig = apiConfig.CurrentValue;
     }
 
     public async Task<List<User>> GetAllUsers()
