@@ -19,8 +19,8 @@ namespace WebAPITest1.UnitTests.Systems.Services
             var expectedResponse = UsersFixture.getTestusers();
 
             var httpClientMock = new Mock<HttpClient>();
-            var apiConfigMock = new Mock<IOptionsSnapshot<UsersApiOptions>>();
-            apiConfigMock.Setup(x => x.Value).Returns(new UsersApiOptions
+            var apiConfigMock = new Mock<IOptionsMonitor<UsersApiOptions>>();
+            apiConfigMock.Setup(x => x.CurrentValue).Returns(new UsersApiOptions
             {
                 Endpoint = "https://jsonplaceholder.typicode.com/users"
             });

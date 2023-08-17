@@ -7,18 +7,18 @@ using WebAPI1.Models;
 public class UsersService : IUsersService
 {
     private readonly HttpClient _httpClient;
-    private readonly UsersApiOptions _apiConfig;
+    private readonly IOptionsMonitor<UsersApiOptions> _apiConfig;
     public UsersService(HttpClient httpClient,
-        IOptionsSnapshot<UsersApiOptions> apiConfig)
+        IOptionsMonitor<UsersApiOptions> apiConfig)
     {
         _httpClient = httpClient;
-        _apiConfig = apiConfig.Value;
+        _apiConfig = apiConfig;
     }
 
     public async Task<List<User>> GetAllUsers()
     {
         var usersResponse = await _httpClient
-            .GetAsync(_apiConfig.Endpoint);
+            .GetAsync(_apiConfig.CurrentValue.Endpoint);
         
         if (usersResponse.StatusCode == HttpStatusCode.NotFound)
         {
