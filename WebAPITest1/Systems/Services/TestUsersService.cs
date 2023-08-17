@@ -6,6 +6,7 @@ using WebAPITest1.UnitTests.Fixtures;
 using WebAPI1.Models;
 using WebAPITest1.UnitTests.MockApi;
 using Xunit;
+using WebAPITest1.UnitTests.Fakes;
 
 namespace WebAPITest1.UnitTests.Systems.Services
 {
@@ -37,17 +38,13 @@ namespace WebAPITest1.UnitTests.Systems.Services
         public async Task GetAllUsers_WhenCalled_ReturnsListOfUsers_Fabio()
         {
             using var mockApi = new MockUsersApi();
-            
-            var localApiOptions = Options.Create<UsersApiOptions>(new()
+
+            var localApiOptions = new FakeOptionsSnapshot<UsersApiOptions>(new()
             {
                 Endpoint = mockApi.UsersEndpoint,
             });
 
-            // Create a mock of IOptionsMonitor<UsersApiOptions>
-            var optionsMonitorMock = new Mock<IOptionsMonitor<UsersApiOptions>>();
-            optionsMonitorMock.Setup(o => o.CurrentValue).Returns(localApiOptions.Value);
-
-            var sut = new UsersService(new HttpClient(), optionsMonitorMock.Object);
+            var sut = new UsersService(new HttpClient(), localApiOptions);
 
             var result = await sut.GetAllUsers();
 
