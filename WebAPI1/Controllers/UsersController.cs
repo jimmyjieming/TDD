@@ -24,7 +24,7 @@ namespace WebAPI1.Controllers
         public async Task<IActionResult> Get()
         {
             var users = await _usersService.GetAllUsers();
-            var totalUser = await _eligibleCheckDemo1.CheckUsersLength(6);
+            var totalUser = await _eligibleCheckDemo1.CheckUsersLength(4);
             if (users.Any() && totalUser)
             {
                 return Ok(users);
@@ -32,8 +32,7 @@ namespace WebAPI1.Controllers
             else
             {
                 return NotFound();
-            }
-            
+            }    
         }
     }
 }
